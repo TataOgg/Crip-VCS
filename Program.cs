@@ -23,8 +23,12 @@ namespace Visualcryptosystem
             bool check = alg.check(1, 0);
             
             /*Algoritmo: Transformadas */
-            MatrixUtilities mu = new MatrixUtilities(n,m);
-            char[][] L0 = mu.T(B0);
+            MatrixUtilities mu22 = new MatrixUtilities(n,m);
+            char[][] L0 = mu22.T(B0);
+            char[][] L1 = mu22.T(B1);
+            MatrixUtilities mu32 = new MatrixUtilities(3, 2);
+            int[][] b32 = new int[][]{ new int[] { 1, 0 }, new int[] { 0, 1 }, new int[] { 1, 0 } };
+            char[][] l32 = mu32.T(b32);
         }
     }
 }

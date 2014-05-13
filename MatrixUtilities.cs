@@ -65,15 +65,8 @@ namespace Visualcryptosystem
             //Init
             char[][] l = new char[n][];
             char[] zeros = new char[m];
-            for (int i = 0; i < n; i++)
-            {
-                l[i] = new char[m];
-            }
-            for (int j = 0; j < m; j++)//Primera línea fullrandom
-            {
-                l[0][j] = getRandomChar();
-            }
-
+            for (int i = 0; i < n; i++) l[i] = new char[m];
+            for (int j = 0; j < m; j++) l[0][j] = getRandomChar();//Primera línea fullrandom
             //Asignar los ceros
             for (int i = 0; i < m; i++)
             {
@@ -90,12 +83,16 @@ namespace Visualcryptosystem
             HashSet<char>[] letters_in_columns = new HashSet<char>[m];
             for (int i = 0; i < m; i++)
             {
+                letters_in_columns[i] = new HashSet<char>();
                 letters_in_columns[i].Add(l[0][i]);
                 letters_in_columns[i].Add(zeros[i]);
             }
-            //End Init
+            return bucleprincipalT(b,l,zeros,letters_in_columns);
+        }
 
-            //Bucle principal
+        private char[][] bucleprincipalT(int[][] b, char[][] lin, char[] zeros, HashSet<char>[] letters_in_columns)
+        {
+            char[][] l = (char[][])lin.Clone();
             for (int i = 1; i < n; i++)
             {
                 for (int j = 0; j < m; j++)
@@ -112,10 +109,7 @@ namespace Visualcryptosystem
                     }
                 }
             }
-
-
             return l;
         }
-
     }
 }
