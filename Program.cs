@@ -9,13 +9,14 @@ namespace Visualcryptosystem
     {
         static void Main(string[] args)
         {
-            int[][] I=new int[][]{new int[]{1,1},new int[]{1,1}};
+            int[][] I=new int[][]{new int[]{0,0},new int[]{1,1}};
             int[][] B1 = new int[][] { new int[] { 1, 0 }, new int[] { 0, 1 } };
             int[][] B0 = new int[][] { new int[] { 1, 0 }, new int[] { 1, 0 } };
             int k = 2;
             int m = 2;
             int n = 2;
-            DVCSCheck alg = new DVCSCheck(I, B0, B1, k, n, m);           
+            DVCSCheck alg = new DVCSCheck(I, B0, B1, k, n, m);   
+            DVCSBasedAlgorithm dvcs = new DVCSBasedAlgorithm(I,2,2,B0,B1,k,n,m);
             /*COMPROBACIÓN DE VALIDEZ DE Bs ELEGIDAS*/
             bool checkB0MaxR = alg.checkB0MaxR(1);
             bool checkB1MaxR = alg.checkB1MaxR(0);
@@ -32,6 +33,7 @@ namespace Visualcryptosystem
             char[][][] T0 = mu22.permuteToT(L0);
             char[][][] T1 = mu22.permuteToT(L1);
             char[][][] T32 = mu32.permuteToT(l32);
+            char[][][] shades = dvcs.generateShades();
         }
     }
 }

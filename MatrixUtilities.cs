@@ -14,7 +14,7 @@ namespace Visualcryptosystem
         int m;
         String dictionary = "default";
         char[] letters;
-            Random randomGenerator = new Random();
+        Random randomGenerator = new Random();
 
         public MatrixUtilities(int n, int m)
         {
