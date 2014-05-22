@@ -29,6 +29,9 @@ namespace Visualcryptosystem
             MatrixUtilities mu32 = new MatrixUtilities(3, 2);
             int[][] b32 = new int[][]{ new int[] { 1, 0 }, new int[] { 0, 1 }, new int[] { 1, 0 } };
             char[][] l32 = mu32.T(b32);
+            char[][][] T0 = mu22.permuteToT(L0);
+            char[][][] T1 = mu22.permuteToT(L1);
+            char[][][] T32 = mu32.permuteToT(l32);
         }
     }
 }

@@ -7,18 +7,55 @@ namespace Visualcryptosystem
 {
     class MatrixUtilities
     {
-        char[] Latin26 = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        char[] Latin26 = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+        int[][] index2 = new int[][]{ new int[]{ 0, 1 }, new int[]{ 1, 0 } };
+        int[][] index3 = new int[][] { new int[] { 0, 1, 2 }, new int[] { 1, 2, 0 }, new int[] { 2, 0, 1 }, new int[] { 0, 2, 1 }, new int[] { 1, 0, 2 }, new int[] { 2, 1, 0 } };
         int n;
         int m;
-        String dictionary="default";
+        String dictionary = "default";
         char[] letters;
-        Random randomGenerator = new Random();
+            Random randomGenerator = new Random();
 
         public MatrixUtilities(int n, int m)
         {
             this.n = n;
             this.m = m;
             letters = Latin26;
+        }
+
+
+        public char[][][] permuteToT(char[][] L)
+        {
+            int[][] indexes;
+            char[][][] t;
+            int size=0;
+            if (m == 2)
+            {
+                size = 2;
+                t = new char[size][][];
+                indexes = index2;
+            }
+            else
+            {
+                size = 6;
+                t = new char[size][][];
+                indexes = index3;
+            }
+
+            for (int i = 0; i < size; i++)
+            {
+                char[][] arrayT = new char[n][];
+                int[] index = indexes[i];
+                for (int row = 0; row < n; row++)
+                {
+                    arrayT[row] = new char[m];
+                    for (int column = 0; column<m; column++) 
+                        arrayT[row][column] = L[row][index[column]];
+                }
+                t[i] = arrayT;
+            }
+            
+            return t;
         }
 
         public void setDictionary(String dictionary)
