@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Visualcryptosystem
 {
-    class DVCSBasedAlgorithm
+    class PVCSBasedAlgorithm
     {
         public int[][] A;
         public int W;
@@ -17,11 +17,12 @@ namespace Visualcryptosystem
         public int n;
         public char[][][] T0;
         public char[][][] T1;
-        public int factorial;
         public MatrixUtilities mxu;
+        char[][] L0;
+        char[][] L1;
         Random randomGenerator = new Random();
 
-        public DVCSBasedAlgorithm(int[][] A, int W, int H, int[][] B0, int[][] B1, int k, int n, int m)
+        public PVCSBasedAlgorithm(int[][] A, int W, int H, int[][] B0, int[][] B1, int k, int n, int m)
         {
             mxu = new MatrixUtilities(n, m);
             this.A = A;
@@ -32,12 +33,12 @@ namespace Visualcryptosystem
             this.k = k;
             this.m = m;
             this.n = n;
-            char[][] L0 = mxu.T(B0);
-            char[][] L1 = mxu.T(B1);
+            L0 = mxu.T(B0);
+            L1 = mxu.T(B1);
             T0 = mxu.permuteToT(L0);
             T1 = mxu.permuteToT(L1);
-
         }
+
 
         public char[][][] generateShades()
         {
@@ -47,31 +48,27 @@ namespace Visualcryptosystem
                 shades[index] = new char[W][];
                 for (int w = 0; w < W; w++)
                 {
-                    shades[index][w] = new char[m * H];
+                    shades[index][w] = new char[H];
                 }
             }
             for (int i = 0; i < W; i++)
             {
                 for (int j = 0; j < H; j++)
                 {
-                    char[][] rows = new char[n][];
+                    char[] column = new char[n];
                     int element = A[i][j];
                     if (element == 0)
                     {
-                        rows = get_rows_of0();
+                        column = get_column_of0();
                     }
                     else
                     {
-                        rows = get_rows_of1();
+                        column = get_column_of1();
                     }
-                  //POPULATE SHADES
+                    //POPULATE SHADES
                     for (int shade = 0; shade < n; shade++)
                     {
-                        char[] row = rows[shade];
-                        for (int position = 0; position < m; position++)
-                        {
-                            shades[shade][i][j*m + position] = row[position];
-                        }
+                        shades[shade][i][j] = column[shade];
                     }
                 }
             }
@@ -79,18 +76,27 @@ namespace Visualcryptosystem
 
         }
 
-
-        public char[][] get_rows_of0()
+        public char[] get_column_of0()
         {
-            int random_index = randomGenerator.Next(0, mxu.getFactorial());
-            char[][] t_random = T0[random_index];
-            return t_random;
+            int random_array = randomGenerator.Next(0, mxu.getFactorial());
+            int random_column = randomGenerator.Next(0,m);
+            char[] column = new char[n];
+            for (int i = 0; i < n; i++)
+            {
+                column[i]= T0[random_array][i][random_column];
+            }
+            return column;
         }
-        public char[][] get_rows_of1()
+        public char[] get_column_of1()
         {
-            int random_index = randomGenerator.Next(0, mxu.getFactorial());
-            char[][] t_random = T1[random_index];
-            return t_random;
+            int random_array = randomGenerator.Next(0, mxu.getFactorial());
+            int random_column = randomGenerator.Next(0, m);
+            char[] column = new char[n];
+            for (int i = 0; i < n; i++)
+            {
+                column[i] = T1[random_array][i][random_column];
+            }
+            return column;
         }
     }
 }

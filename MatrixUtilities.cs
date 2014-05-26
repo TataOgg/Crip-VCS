@@ -16,6 +16,17 @@ namespace Visualcryptosystem
         char[] letters;
         Random randomGenerator = new Random();
 
+        public int getFactorial()
+        {
+            if (m == 2)
+            {
+                return 2;
+            }
+            else
+            {
+                return 6;
+            }
+        }
         public MatrixUtilities(int n, int m)
         {
             this.n = n;
@@ -28,16 +39,14 @@ namespace Visualcryptosystem
         {
             int[][] indexes;
             char[][][] t;
-            int size=0;
+            int size=getFactorial();
             if (m == 2)
             {
-                size = 2;
                 t = new char[size][][];
                 indexes = index2;
             }
             else
             {
-                size = 6;
                 t = new char[size][][];
                 indexes = index3;
             }

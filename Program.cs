@@ -15,8 +15,9 @@ namespace Visualcryptosystem
             int k = 2;
             int m = 2;
             int n = 2;
-            DVCSCheck alg = new DVCSCheck(I, B0, B1, k, n, m);   
-            DVCSBasedAlgorithm dvcs = new DVCSBasedAlgorithm(I,2,2,B0,B1,k,n,m);
+            DVCSCheck alg = new DVCSCheck(I, B0, B1, k, n, m);
+            DVCSBasedAlgorithm dvcs = new DVCSBasedAlgorithm(I, 2, 2, B0, B1, k, n, m);
+            PVCSBasedAlgorithm pvcs = new PVCSBasedAlgorithm(I, 2, 2, B0, B1, k, n, m);
             /*COMPROBACIÓN DE VALIDEZ DE Bs ELEGIDAS*/
             bool checkB0MaxR = alg.checkB0MaxR(1);
             bool checkB1MaxR = alg.checkB1MaxR(0);
@@ -33,7 +34,8 @@ namespace Visualcryptosystem
             char[][][] T0 = mu22.permuteToT(L0);
             char[][][] T1 = mu22.permuteToT(L1);
             char[][][] T32 = mu32.permuteToT(l32);
-            char[][][] shades = dvcs.generateShades();
+            char[][][] shades_dvcs = dvcs.generateShades();
+            char[][][] shades_pvcs = pvcs.generateShades();
         }
     }
 }
